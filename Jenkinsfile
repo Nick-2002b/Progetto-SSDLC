@@ -1,6 +1,11 @@
 pipeline {  
     agent any  
-        stages {  
+        stages {
+			stage('Build') { 
+            steps {
+                sh 'mvn -B -DskipTests clean package' 
+            }
+        }
        	    stage("git_checkout") {  
            	    steps {  
               	    echo "cloning repository" 
