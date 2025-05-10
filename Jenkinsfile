@@ -12,6 +12,16 @@ pipeline {
               	    echo "repo cloned successfully"  
               	    }  
          	    }
+				stage('Run Sonarqube') {
+            		environment {
+                		scannerHome = tool 'lil-sonar-tool';
+						}
+            	steps {
+              		withSonarQubeEnv(credentialsId: 'lil-sonar-credentials', installationName: 'lil sonar installation') {
+                	sh "${scannerHome}/bin/sonar-scanner"
+              	}
+            }
+		}
 			stage('Dependency Check') {
 				steps {
         			sh 'mvn verify -Ddependency-check.failBuildOnCVSS=7'
