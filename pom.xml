@@ -33,6 +33,20 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Dependency Check -->
+			<plugin>
+  				<groupId>org.owasp</groupId>
+  				<artifactId>dependency-check-maven</artifactId>
+  				<version>12.1.0</version>
+  				<executions>
+    				<execution>
+      					<goals>
+        					<goal>check</goal>
+      					</goals>
+    				</execution>
+  				</executions>
+			</plugin>
+			<!-- Dependency Check -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
