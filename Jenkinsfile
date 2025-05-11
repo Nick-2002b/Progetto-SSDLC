@@ -17,7 +17,7 @@ pipeline {
                 		scannerHome = tool 'SSLDC-sonarqube';
 						}
             	steps {
-              		withSonarQubeEnv(credentialsId: 'sonarqube2', installationName: 'lil sonar installation') {
+              		withSonarQubeEnv(credentialsId: 'sonarqube2', installationName: 'LocalSonar') {
                 	sh "${scannerHome}/bin/sonar-scanner"
               	}
             }
