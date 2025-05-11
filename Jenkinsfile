@@ -14,7 +14,7 @@ pipeline {
          	    }
 				stage('Run Sonarqube') {
             		environment {
-                		scannerHome = tool 'lil-sonar-tool';
+                		scannerHome = tool 'LocalSonar';
 						}
             	steps {
               		withSonarQubeEnv(credentialsId: 'sonarqube2', installationName: 'lil sonar installation') {
