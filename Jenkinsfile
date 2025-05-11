@@ -18,7 +18,7 @@ pipeline {
 						}
             	steps {
               		withSonarQubeEnv(credentialsId: 'sonarqube2', installationName: 'LocalSonar') {
-                	sh "${scannerHome}/bin/sonar-scanner"
+                	sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://nome-container-sonarqube:9000"
               	}
             }
 		}
