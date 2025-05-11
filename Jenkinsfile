@@ -17,7 +17,7 @@ pipeline {
                 		scannerHome = tool 'lil-sonar-tool';
 						}
             	steps {
-              		withSonarQubeEnv(credentialsId: 'lil-sonar-credentials', installationName: 'lil sonar installation') {
+              		withSonarQubeEnv(credentialsId: 'sonarqube2', installationName: 'lil sonar installation') {
                 	sh "${scannerHome}/bin/sonar-scanner"
               	}
             }
