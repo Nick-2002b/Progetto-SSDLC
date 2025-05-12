@@ -48,5 +48,13 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.war', fingerprint: true
             }
         }
+        stage('Notify') {
+            steps {
+                echo "---Pipeline completata con successo."
+                echo "---Nessuna vulnerabilità con CVSS >= 7 trovata."
+                echo "---Quality Gate SonarQube superato."
+                echo "---Artefatto salvato: target/xxx.war"
+            }
+        }
     }
 }
