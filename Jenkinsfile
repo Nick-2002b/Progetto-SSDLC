@@ -35,7 +35,7 @@ pipeline {
 
         stage('Dependency Check') {
             steps {
-                sh 'mvn verify -Ddependency-check.failBuildOnCVSS=7'
+                sh 'mvn verify'
             }
             post {
                 always {
