@@ -168,15 +168,12 @@ Ho impostato `failBuildOnCVSS=8` nel pom.xml per bloccare la build in presenza d
 
 ### 5.3. Report
 
-Il report è stato allegato e archiviato da Jenkins automaticamente:
+Il report è stato allegato e archiviato da Jenkins automaticamente definito nella pipeline:
 
 - [Visualizza report Dependency-Check](/target/dependency-check-report.html)
 
-### 5.4 Tabella delle vulnerabilita principali
+### 5.4 Tabella delle vulnerabilità principali rilevate da Dependency Check
 
-# Elenco Vulnerabilità da Dependency Check
-
-### 5.4. Principali Vulnerabilità Rilevate
 
 | CVE ID         | Gravità  | CVSS | Componente             | OWASP Category                 | Descrizione | Suggerimento di fix                               |
 | -------------- | -------- | ---- | ---------------------- | ------------------------------ | ------------| ------------------------------------------------- |
@@ -188,6 +185,15 @@ Il report è stato allegato e archiviato da Jenkins automaticamente:
 | CVE-2022-3509  | HIGH     | 7.5  | protobuf-java          | A06: Vulnerable Components     | Un problema di parsing simile a CVE-2022-3171, ma relativo al textformat nelle versioni core e lite di protobuf-java precedenti alle versioni 3.21.7, può portare a un attacco di denial of service (DoS). | Aggiornare `protobuf-java` ≥ 3.21.7                 |
 | CVE-2022-3510  | HIGH     | 7.5  | protobuf-java          | A06: Vulnerable Components     | Un problema di parsing simile a CVE-2022-3171, ma relativo alle estensioni di tipo Message `(Message-Type Extensions)` nelle versioni core e lite di protobuf-java precedenti alle versioni 3.21.7, può portare a un attacco di denial of service (DoS) | Aggiornare `protobuf-java` ≥ 3.21.7                 |
 | CVE-2021-22569 | MEDIUM   | 5.5  | protobuf-java          | A06: Security Misconfiguration | Un problema in protobuf-java consentiva l'interleavin (intercalazione) dei campi di `com.google.protobuf.UnknownFieldSet` in modo tale da essere elaborati fuori ordine. Un piccolo payload malevolo può impegnare il parser per diversi minuti creando un numero elevato di oggetti a vita breve, causando pause frequenti e ripetute nel processo. | Aggiornare ≥ 3.16.1 o migliorare il parser Protobuf   |
+
+In base al quality gate di Dependency Check che ho impostato, la build su Jenkins falliva riportando le vulnerabilità citate qui sopra.
+
+Screenshot del fallimento della build:
+![](report-files/pipeline.png)
+![](report-files/Build_Error_DC.png)
+
+Tutte queste vulnerabilità sono scaturite dalle dipendenze con versioni vecchie di: postgresql, mysql-connector e protobuf.
+Sono state risolte tutte aggiornando le dipendenze a una versione superiore che non presentano problemi di sicurezza noti.
 
 ## 6. Gestione Artefatti
 
@@ -218,12 +224,10 @@ Tutti i componenti sono stati eseguiti su Docker e integrati tra loro.
 
 - Interfaccia SonarQube (inclusa sopra)
 - Pipeline Jenkins completata:
-  ![](report-files/1.png)
-  ![](report-files/2.png)
-  ![](report-files/3.png)
 - Artifact `.war` generato (nella cartella `target/onlinebookstore.war`)
-
-
+![](report-files/1.png)
+![](report-files/2.png)
+![](report-files/3.png)
 
 ## **Repository** 
 Il codice sorgente utilizzato per il progetto:
